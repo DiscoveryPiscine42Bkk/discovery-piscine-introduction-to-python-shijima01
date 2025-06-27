@@ -2,6 +2,21 @@ def checkmate(board_str):
     board = [list(row) for row in board_str.strip().split('\n')]
     size = len(board)
 
+    def count_king():
+        count = 0
+        for row in board:
+            count += row.count('K')
+        if count == 0:
+            print("Error: No king on the board.")
+            return False
+        elif count > 1:
+            print("Error: Too many king.")
+            return False
+        return True
+
+    if not count_king():
+        return
+
     king_pos = None
     for y in range(size):
         for x in range(size):
@@ -10,9 +25,6 @@ def checkmate(board_str):
                 break
         if king_pos:
             break
-
-    if not king_pos:
-        return
 
     yk, xk = king_pos
 
